@@ -12,59 +12,59 @@ namespace CardSortShuffle
             foreach (Card c in cardDeck)
             {
                 tempRank = 0;
-                switch (c.Face())
+                switch (c.Face.ToLower())
                 {
-                    case "Two":
+                    case "two":
                         tempRank = 0;
                         break;
-                    case "Three":
+                    case "three":
                         tempRank = 1;
                         break;
-                    case "Four":
+                    case "four":
                         tempRank = 2;
                         break;
-                    case "Five":
+                    case "five":
                         tempRank = 3;
                         break;
-                    case "Six":
+                    case "six":
                         tempRank = 4;
                         break;
-                    case "Seven":
+                    case "seven":
                         tempRank = 5;
                         break;
-                    case "Eight":
+                    case "eight":
                         tempRank = 6;
                         break;
-                    case "Nine":
+                    case "nine":
                         tempRank = 7;
                         break;
-                    case "Ten":
+                    case "ten":
                         tempRank = 8;
                         break;
-                    case "Jack":
+                    case "jack":
                         tempRank = 9;
                         break;
-                    case "Queen":
+                    case "queen":
                         tempRank = 10;
                         break;
-                    case "King":
+                    case "king":
                         tempRank = 11;
                         break;
-                    case "Ace":
+                    case "ace":
                         tempRank = 12;
                         break;
                 }
-                switch (c.Suit())
+                switch (c.Suit.ToLower())
                 {
-                    case "Clubs":
+                    case "clubs":
                         break;
-                    case "Diamonds":
+                    case "diamonds":
                         tempRank += 13;
                         break;
-                    case "Hearts":
+                    case "hearts":
                         tempRank += 26;
                         break;
-                    case "Spades":
+                    case "spades":
                         tempRank += 39;
                         break;
                 }
@@ -82,67 +82,71 @@ namespace CardSortShuffle
         {
             int[] testDeck = new int[52];
             if (cardDeck.Length < 52)
-                throw new System.ArgumentException("Deck cannot contain fewer than 52 cards.");
+                throw new System.ArgumentException("Deck cannot contain fewer than 52 cards");
             else if (cardDeck.Length > 52)
-                throw new System.ArgumentException("Deck cannot contain more than 52 cards.");
+                throw new System.ArgumentException("Deck cannot contain more than 52 cards");
             foreach (Card c in cardDeck)  //These switch segments determine whether all 52 unique cards occupy the deck
             {
-                int deckPos = 0;
-                switch (c.Face())
+                if (c == null)
                 {
-                    case "Two":
+                    throw new System.NullReferenceException("Card value cannot be null");
+                }
+                int deckPos = 0;
+                switch (c.Face.ToLower())
+                {
+                    case "two":
                         deckPos = 0;
                         break;
-                    case "Three":
+                    case "three":
                         deckPos = 1;
                         break;
-                    case "Four":
+                    case "four":
                         deckPos = 2;
                         break;
-                    case "Five":
+                    case "five":
                         deckPos = 3;
                         break;
-                    case "Six":
+                    case "six":
                         deckPos = 4;
                         break;
-                    case "Seven":
+                    case "seven":
                         deckPos = 5;
                         break;
-                    case "Eight":
+                    case "eight":
                         deckPos = 6;
                         break;
-                    case "Nine":
+                    case "nine":
                         deckPos = 7;
                         break;
-                    case "Ten":
+                    case "ten":
                         deckPos = 8;
                         break;
-                    case "Jack":
+                    case "jack":
                         deckPos = 9;
                         break;
-                    case "Queen":
+                    case "queen":
                         deckPos = 10;
                         break;
-                    case "King":
+                    case "king":
                         deckPos = 11;
                         break;
-                    case "Ace":
+                    case "ace":
                         deckPos = 12;
                         break;
                     default:
                         throw new System.ArgumentException("Invalid card face in the deck.  Check input deck and try again");
                 }
-                switch (c.Suit())
+                switch (c.Suit.ToLower())
                 {
-                    case "Clubs":
+                    case "clubs":
                         break;
-                    case "Diamonds":
+                    case "diamonds":
                         deckPos += 13;
                         break;
-                    case "Hearts":
+                    case "hearts":
                         deckPos += 26;
                         break;
-                    case "Spades":
+                    case "spades":
                         deckPos += 39;
                         break;
                     default:
@@ -163,7 +167,7 @@ namespace CardSortShuffle
             Random rand = new Random();
             int k = 0;
             while (k < 3)  //Shuffles 3 times for "poker-ready" deck
-            { 
+            {
                 for (int i = cardDeck.Length - 1; i > 0; i--)  //Using a Knuth-Fisher-Yates shuffle
                 {
                     int n = rand.Next(i + 1);

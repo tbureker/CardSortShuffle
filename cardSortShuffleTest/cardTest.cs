@@ -27,7 +27,7 @@ namespace cardSortShuffleTest
         public void largeDeckShuffle()  //Tries to shuffle a deck that has too many cards
         {
             Card[] largeDeck = new Card[53];
-            for (int i = 0; i < largeDeck.Length-2; i++)
+            for (int i = 0; i < largeDeck.Length - 2; i++)
             {
                 largeDeck[i] = trustedDeck[i];
             }
@@ -83,7 +83,28 @@ namespace cardSortShuffleTest
             cardMethods.sortByAscending(ref emptyCardDeck);
         }
 
-        /*                          
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void nullDeckSort()  //Tries to sort a deck with null cards
+        {
+            Card[] nullDeck = new Card[52];
+            cardMethods.sortByAscending(ref nullDeck);
+        }
+
+        [TestMethod]
+        public void lowerCaseSort()  //Tries to sort a deck with lower case faces & suits
+        {
+            Card[] lowerCaseDeck = cardMethods.buildDeck();
+            for (int i = 0; i < lowerCaseDeck.Length; i++)
+            {
+                lowerCaseDeck[i] = new Card(lowerCaseDeck[i].Face.ToLower(), lowerCaseDeck[i].Suit.ToLower());
+            }
+            cardMethods.sortByAscending(ref lowerCaseDeck);
+        }
+
+        /*
+                     
+                    
                 //These tests are redundant.  They are commented out because in a black-box testing scenario I wouldn't know that both Shuffle and Sort call the same "checkDeck" function, and so would be included in a testing suite.
 
                 [TestMethod]
@@ -145,6 +166,25 @@ namespace cardSortShuffleTest
                     Card[] emptyCardDeck = cardMethods.buildDeck();
                     emptyCardDeck[45] = new Card("", "");
                     cardMethods.shuffleDeck(ref emptyCardDeck);
+                }
+
+                [TestMethod]
+                [ExpectedException(typeof(NullReferenceException))]
+                public void nullDeckShuffle()  
+                {
+                    Card[] nullDeck = new Card[52];
+                    cardMethods.shuffleDeck(ref nullDeck);
+                }
+
+                [TestMethod]
+                public void lowerCaseShuffle()  
+                {
+                    Card[] lowerCaseDeck = cardMethods.buildDeck();
+                    for (int i = 0; i < lowerCaseDeck.Length; i++)
+                    {
+                        lowerCaseDeck[i] = new Card(lowerCaseDeck[i].Face.ToLower(), lowerCaseDeck[i].Suit.ToLower());
+                    }
+                    cardMethods.shuffleDeck(ref lowerCaseDeck);
                 }
 
             */
