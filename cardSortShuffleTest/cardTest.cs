@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// <summary>
+/// Card Sorting & Shuffling program
+/// Written by Tony Bureker for Shiftwise
+/// </summary>
+
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CardSortShuffle;
 

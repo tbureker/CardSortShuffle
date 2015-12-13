@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// <summary>
+/// Card Sorting & Shuffling methods
+/// Written by Tony Bureker for Shiftwise
+/// </summary>
+
+using System;
 
 namespace CardSortShuffle
 {
