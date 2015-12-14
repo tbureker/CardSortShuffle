@@ -9,8 +9,8 @@ namespace CardSortShuffle
 {
     public class Card
     {
-        public string Face { get; }
-        public string Suit { get; }
+        public string Face { get; set; }
+        public string Suit { get; set; }
         public Card()
         {
             throw new System.ArgumentException("No card data supplied");
