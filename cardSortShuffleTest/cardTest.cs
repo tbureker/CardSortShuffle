@@ -18,21 +18,47 @@ namespace cardSortShuffleTest
         {
             Card[] testDeck = cardMethods.buildDeck();
             cardMethods.shuffleDeck(ref testDeck);
-            Assert.AreNotSame(trustedDeck, testDeck);
-            cardMethods.sortByAscending(ref testDeck);
-            for (int i = 0; i < trustedDeck.Length - 1; i++)
+            int differentCard = 0;
+            for (int i = 0; i < trustedDeck.Length; i++)  //Verifies the test deck against the trusted deck. Fails test on null card and counts number of differences.
             {
-                Assert.AreEqual(trustedDeck[i].ToString(), testDeck[i].ToString());
+                Assert.IsNotNull(testDeck[i]);
+                if (testDeck[i] != trustedDeck[i]) differentCard += 1;
+            }
+            if (differentCard < 30) Assert.Fail("Deck not shuffled properly");  //fails the test if a sufficient number of cards are the same
+            cardMethods.sortByAscending(ref testDeck);
+            for (int i = 0; i < trustedDeck.Length; i++)
+            {
+                Assert.AreEqual(trustedDeck[i], testDeck[i]);
             }
         }
 
+        [TestMethod]
+        public void cardCreate()  //Tests card creation & ToString functionality
+        {
+            Card testCard = new Card("Two", "Clubs");
+            Assert.AreEqual("Two", testCard.Face);
+            Assert.AreEqual("Clubs", testCard.Suit);
+            Assert.AreEqual("Two of Clubs", testCard.ToString());
+        }
+
+        [TestMethod]
+        public void cardEquality() //Tests card Equal overload 
+        {
+            Card testCard1 = new Card("Two", "Spades");
+            Card testCard2 = new Card("Two", "Spades");
+            Assert.AreEqual(testCard1, testCard2);
+            testCard2 = new Card("Two", "Diamonds");
+            Assert.AreNotEqual(testCard1, testCard2);
+            testCard2 = new Card("Three", "Spades");
+            Assert.AreNotEqual(testCard1, testCard2);
+        }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void largeDeckShuffle()  //Tries to shuffle a deck that has too many cards
         {
             Card[] largeDeck = new Card[53];
-            for (int i = 0; i < largeDeck.Length - 2; i++)
+            for (int i = 0; i < largeDeck.Length - 1; i++)
             {
                 largeDeck[i] = trustedDeck[i];
             }

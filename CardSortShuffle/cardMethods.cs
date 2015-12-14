@@ -83,7 +83,7 @@ namespace CardSortShuffle
             return buildDeck();
         }
 
-        static void checkDeck(Card[] cardDeck)  //function to error-check the deck prior to manipulation
+        public static void checkDeck(Card[] cardDeck)  //function to error-check the deck prior to manipulation
         {
             int[] testDeck = new int[52];
             if (cardDeck.Length < 52)
@@ -166,12 +166,13 @@ namespace CardSortShuffle
             }
 
         }
-        public static void shuffleDeck(ref Card[] cardDeck)
+
+        public static void shuffleDeck(ref Card[] cardDeck, int shuffleNum = 1)  //Optional variable to allow multiple shuffles
         {
             checkDeck(cardDeck);
             Random rand = new Random();
             int k = 0;
-            while (k < 3)  //Shuffles 3 times for "poker-ready" deck
+            while (k < shuffleNum) 
             {
                 for (int i = cardDeck.Length - 1; i > 0; i--)  //Using a Knuth-Fisher-Yates shuffle
                 {
@@ -183,6 +184,7 @@ namespace CardSortShuffle
                 k++;
             }
         }
+
         public static Card[] buildDeck()   //Creates a basic deck to work with
         {
             Card[] cardDeck = new Card[52];
