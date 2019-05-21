@@ -1,4 +1,4 @@
 # CardSortShuffle
-Coding exercise for Shiftwise.
+Coding exercise.
 
 Written by Tony Bureker
